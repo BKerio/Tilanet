@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 43 24% 96%;
+    --foreground: 220 6% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 6% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 6% 10%;
+    --primary: 28 91% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 6% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 5% 90%;
+    --muted-foreground: 220 3% 45%;
+    --accent: 28 91% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 8% 88%;
+    --input: 220 8% 88%;
+    --ring: 28 91% 54%;
+    --radius: 0rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-charcoal antialiased;
+    font-family: 'Lexend', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+    color: #6f7174;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lexend', system-ui, sans-serif;
+    color: #18191c;
+    letter-spacing: -0.04em;
+  }
+
+  ::selection {
+    background: #18191c;
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .sec-subtitle {
+    @apply text-[15px] font-medium uppercase tracking-[0.1em] text-[#6f7174];
+  }
+
+  .sec-title {
+    @apply text-3xl sm:text-4xl lg:text-[50px] font-semibold text-charcoal leading-[1.2] tracking-tight;
+  }
+
+  .section-padding {
+    @apply py-20 lg:py-[120px] px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-theme {
+    @apply relative overflow-hidden inline-flex items-center justify-center px-10 py-5
+           bg-primary text-primary-foreground text-[15px] font-semibold transition-colors duration-300;
+  }
+
+  .btn-theme::before {
+    content: '';
+    @apply absolute inset-y-0 left-0 w-[7px] bg-charcoal/20 transition-all duration-300 ease-out;
+  }
+
+  .btn-theme:hover::before {
+    @apply w-full bg-charcoal;
+  }
+
+  .btn-theme:hover {
+    @apply text-white;
+  }
+
+  .btn-theme-dark {
+    @apply bg-charcoal text-white;
+  }
+
+  .btn-theme-dark::before {
+    @apply bg-golden/30;
+  }
+
+  .btn-theme-dark:hover::before {
+    @apply bg-golden w-full;
+  }
+
+  .btn-theme-dark:hover {
+    @apply text-charcoal;
+  }
+
+  .btn-theme-outline {
+    @apply bg-transparent border-2 border-charcoal text-charcoal;
+  }
+
+  .btn-theme-outline::before {
+    @apply bg-charcoal;
+  }
+
+  .btn-theme-outline:hover {
+    @apply text-white border-charcoal;
+  }
+
+  .btn-primary {
+    @apply btn-theme;
+  }
+
+  .btn-accent {
+    @apply btn-theme btn-theme-dark;
+  }
+
+  .btn-outline {
+    @apply btn-theme btn-theme-outline;
+  }
+
+  .service-block {
+    @apply relative bg-white transition-all duration-300
+           shadow-[0_10px_60px_rgba(0,0,0,0.08)] border-t-4 border-transparent
+           hover:border-golden hover:shadow-[0_10px_60px_rgba(0,0,0,0.12)];
+    overflow: visible;
+  }
+
+  .testimonial-card-dark {
+    @apply bg-charcoal text-white p-8 sm:p-10 relative;
+  }
+
+  .news-card {
+    @apply bg-white border border-[#e1e2e7] overflow-hidden transition-shadow duration-300
+           hover:shadow-[0_10px_60px_rgba(0,0,0,0.1)];
+  }
+
+  .why-icon-circle {
+    @apply w-[70px] h-[70px] rounded-full bg-white flex items-center justify-center
+           shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-all duration-300
+           group-hover:bg-charcoal;
+  }
+
+  .link-hover-line {
+    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:h-px
+           after:w-0 after:bg-golden after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .editorial-section {
+    @apply py-20 lg:py-[120px] px-4 sm:px-6 lg:px-8;
+  }
+
+  .site-container {
+    @apply max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .display-md {
+    @apply text-3xl sm:text-4xl lg:text-[50px] font-semibold text-figure-ink leading-[1.2] tracking-tight;
+  }
+
+  .eyebrow {
+    @apply text-[15px] font-medium uppercase tracking-[0.1em] text-figure-muted;
+  }
+
+  .text-link {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-figure-ink hover:text-golden border-b border-figure-ink hover:border-golden pb-1 transition-colors;
+  }
+}
+
+@layer utilities {
+  .text-body {
+    color: #6f7174;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f3f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F58220;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D96500;
+}
+
+@layer utilities {
+  .font-dyslexia {
+    font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+  }
+  .cursor-large, .cursor-large * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="%23000" stroke="%23FFF" stroke-width="2" d="M2 2l28 11.5-12.5 4.5L12 30z"/></svg>') 4 4, auto !important;
+  }
+  .disable-animations, .disable-animations * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .highlight-links a, .highlight-links button {
+    outline: 2px solid #FF0000 !important;
+    outline-offset: 2px !important;
+    text-decoration: underline !important;
+  }
+}
