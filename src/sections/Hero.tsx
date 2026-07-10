@@ -11,7 +11,7 @@ type HeroSlide = {
   proof: { value: string; label: string };
   images: {
     center: { src: string; alt: string }; 
-    bottomLeft: { src: string; alt: string }; ww
+    bottomLeft: { src: string; alt: string }; 
     topRight: { src: string; alt: string };
     bottomRight: { src: string; alt: string };
   };
