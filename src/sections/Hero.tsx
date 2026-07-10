@@ -10,7 +10,7 @@ type HeroSlide = {
   secondaryCta: { label: string; href: string };
   proof: { value: string; label: string };
   images: {
-    center: { src: string; alt: string };
+    center: { src: string; alt: string };  uu
     bottomLeft: { src: string; alt: string };
     topRight: { src: string; alt: string };
     bottomRight: { src: string; alt: string };
