@@ -1,4 +1,4 @@
-# 💼 Dynatrix Consulting — Premium Corporate Platform
+# TILA-NET ENTERPRISE LIMITED — Premium Corporate Platform
 
 [![React](https://img.shields.io/badge/React-19.2-blue.svg?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
