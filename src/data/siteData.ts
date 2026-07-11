@@ -2,7 +2,7 @@
 
 export type SolutionProduct = {
   name: string;
-  logo: string;k
+  logo: string;
 };
 
 export type SolutionCategory = {
