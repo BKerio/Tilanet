@@ -482,7 +482,7 @@ export default function Process() {
       <PageHero
         eyebrow="Our Process"
         title="How We Source & Deliver"
-        description="A transparent, step-by-step view of how Tilanet identifies, procures, and delivers products and services to organizations across Africa."
+        description="A transparent, step-by-step view of how Tila-Net identifies, sources, and delivers general supply products to individuals, businesses, and institutions across Kenya."
       />
 
       {/* ── Main split-column scroll section ── */}

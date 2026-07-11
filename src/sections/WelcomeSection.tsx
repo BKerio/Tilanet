@@ -8,10 +8,10 @@ import ThemeButton from '@/components/ThemeButton';
 gsap.registerPlugin(ScrollTrigger);
 
 const expertisePoints = [
-  'Fast sourcing and clear pricing with verified suppliers and dependable lead times.',
-  'Reliable delivery coordination across sites with proof of delivery and status updates.',
-  'Bulk and contract supply for organizations that need predictable, recurring fulfillment.',
-  'After‑sales support for warranties, replacements, and ongoing account management.',
+  'General office stationery, IT accessories, PPE, uniforms, and cleaning materials.',
+  'Motor vehicle batteries, tyres, spare parts, and general accessories.',
+  'Tailored supply contracts for parastatals, private companies, and government institutions.',
+  'Timely delivery, competitive pricing, and dependable after-sales support.',
 ];
 
 export default function WelcomeSection() {
@@ -79,7 +79,7 @@ export default function WelcomeSection() {
               <div className="relative rounded-2xl overflow-hidden border border-white/80 shadow-[0_24px_64px_rgba(24,25,28,0.14)]">
                 <img
                   src="/service-software.jpg"
-                  alt="Tilanet team at work"
+                  alt="Tila-Net team at work"
                   className="block w-full h-auto max-w-full"
                 />
                 <div

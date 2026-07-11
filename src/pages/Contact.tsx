@@ -105,11 +105,9 @@ export default function Contact() {
                     </div>
                     <select value={formData.service} onChange={(e) => setFormData({ ...formData, service: e.target.value })} className={inputClass}>
                       <option value="">Select a service</option>
-                      <option value="procurement">Procurement & Sourcing</option>
-                      <option value="ict-supply">ICT Hardware & Accessories Supply</option>
-                      <option value="logistics">Logistics & Delivery</option>
-                      <option value="contract">Contract & Bulk Supply</option>
-                      <option value="after-sales">After‑Sales Support</option>
+                      <option value="office-institutional">General Office & Institutional Supplies</option>
+                      <option value="motor-vehicle">Motor Vehicle Accessories & Spares</option>
+                      <option value="specialised-contracts">Specialised Supply Contracts</option>
                       <option value="other">Other</option>
                     </select>
                     <textarea required rows={5} placeholder="Message *" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className={`${inputClass} resize-none`} />

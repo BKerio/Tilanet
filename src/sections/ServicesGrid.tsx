@@ -16,19 +16,15 @@ interface ServicesGridProps {
 }
 
 const shortTitleMap: Record<string, string> = {
-  'procurement-sourcing': 'Sourcing',
-  'ict-supply': 'ICT Supply',
-  'logistics-delivery': 'Delivery',
-  'contract-supply': 'Contract Supply',
-  'after-sales': 'After‑Sales',
+  'office-institutional': 'Office Supplies',
+  'motor-vehicle': 'Vehicle Spares',
+  'specialised-contracts': 'Contracts',
 };
 
 const imageAltMap: Record<string, string> = {
-  'procurement-sourcing': 'Business handshake during procurement agreement in Nairobi, Kenya',
-  'ict-supply': 'African professional reviewing ICT hardware supply on a laptop',
-  'logistics-delivery': 'Container handling at Dar es Salaam port, Tanzania',
-  'contract-supply': 'Shipping containers at Mombasa port for bulk contract supply',
-  'after-sales': 'African business team providing after-sales account support',
+  'office-institutional': 'Office and institutional supplies in Nairobi, Kenya',
+  'motor-vehicle': 'Motor vehicle accessories and spare parts supply',
+  'specialised-contracts': 'Bulk and framework supply contracts for institutions',
 };
 
 const operationProcessSteps = services.map((item, index) => ({
@@ -201,9 +197,9 @@ export default function ServicesGrid({
         <div className="mb-16">
           <p className="eyebrow text-figure-muted mb-6">What we do</p>
           <h2 className="display-md">
-            Supplier services built for
+            Products and services built for
             <br className="hidden sm:block" />
-            {' '}reliable operations
+            {' '}reliable supply
           </h2>
         </div>
 

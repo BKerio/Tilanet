@@ -19,13 +19,13 @@ type HeroSlide = {
 
 const slides: HeroSlide[] = [
   {
-    eyebrow: 'Supplier company · Nairobi, Kenya',
-    title: 'Your trusted partner for sourcing and supply across Africa.',
+    eyebrow: 'General supplier · Nairobi, Kenya',
+    title: 'The supplier you can always count on.',
     subtitle:
-      'Tilanet is a supplier company that helps organizations procure ICT hardware, office essentials, and technology products-with clear pricing, verified vendors, and dependable delivery to your door.',
-    highlights: ['Procurement & sourcing', 'ICT & office products', 'Nationwide delivery'],
+      'Tila-Net Enterprises Limited offers a comprehensive range of general supply products and services — from everyday office essentials to specialised technical and institutional supplies.',
+    highlights: ['Office & institutional supplies', 'Motor vehicle spares', 'Specialised contracts'],
     primaryCta: { label: 'Request a Quote', href: '/contact' },
-    secondaryCta: { label: 'Our Supply Services', href: '/services' },
+    secondaryCta: { label: 'Our Services', href: '/services' },
     proof: { value: '30+', label: 'Organizations supplied' },
     images: {
       center: { src: '/hero-mombasa-containers.jpg', alt: 'Shipping containers at Mombasa port, Kenya' },
@@ -35,13 +35,13 @@ const slides: HeroSlide[] = [
     },
   },
   {
-    eyebrow: 'From request to delivery',
-    title: 'Tell us what you need-we source it and deliver it.',
+    eyebrow: 'Beyond the brief',
+    title: 'Right products. Right price. On time, every time.',
     subtitle:
-      'Share your product list, quantities, and delivery locations. We handle vendor sourcing, purchase coordination, quality checks, and last-mile delivery-so your teams stay focused on operations.',
-    highlights: ['RFQ & quotation support', 'Purchase order handling', 'Proof of delivery'],
+      'We treat every order as a commitment, not just a transaction. Share your requirements and we will source, price, and deliver — for individuals, businesses, parastatals, and government institutions.',
+    highlights: ['Competitive pricing', 'Timely delivery', 'After-sales support'],
     primaryCta: { label: 'Get a Quote', href: '/contact' },
-    secondaryCta: { label: 'View Products', href: '/solutions' },
+    secondaryCta: { label: 'View Services', href: '/services' },
     proof: { value: '40+', label: 'Successful deliveries' },
     images: {
       center: { src: '/hero-container-yard.jpg', alt: 'Aerial view of shipping container yard' },
@@ -51,14 +51,14 @@ const slides: HeroSlide[] = [
     },
   },
   {
-    eyebrow: 'Contract & bulk supply',
-    title: 'Recurring supply for teams that need consistency.',
+    eyebrow: 'Specialised supply contracts',
+    title: 'Tailored contracts for institutions and enterprises.',
     subtitle:
-      'For organizations with ongoing procurement needs, Tilanet offers contract supply, bulk ordering, and dedicated account support-so you get the same products, on schedule, every time.',
-    highlights: ['Bulk & framework supply', 'Predictable lead times', 'After-sales support'],
+      'For parastatals, private companies, and government institutions, Tila-Net offers bulk and framework supply agreements with dependable delivery and consistent quality.',
+    highlights: ['Framework agreements', 'Bulk supply contracts', 'Institutional supply'],
     primaryCta: { label: 'Talk to Our Team', href: '/contact' },
-    secondaryCta: { label: 'How We Supply', href: '/process' },
-    proof: { value: '100%', label: 'Repeat customers' },
+    secondaryCta: { label: 'How We Work', href: '/process' },
+    proof: { value: '100%', label: 'Client commitment' },
     images: {
       center: { src: '/hero-warehouse-boxes.jpg', alt: 'Bulk supply stored in warehouse' },
       bottomLeft: { src: '/hero-africa-business-team.jpg', alt: 'Account team supporting contract supply' },
