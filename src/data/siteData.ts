@@ -400,7 +400,7 @@ export const companyInfo = {
   email: 'info@tila-net.co.ke',
   website: 'tila-net.co.ke',
   hours: {
-    weekday: 'Mon - Fri: 8:00am - 5:30pm',
+    weekday: 'Mon - Fri: 8:00am - 5:00pm',
     saturday: 'Saturday: 9:00am - 1:00pm',
     sunday: 'Sunday & Public Holidays: Closed',
   },
