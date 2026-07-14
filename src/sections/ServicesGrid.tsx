@@ -16,9 +16,9 @@ interface ServicesGridProps {
 }
 
 const shortTitleMap: Record<string, string> = {
-  'office-institutional': 'Office Supplies',
-  'motor-vehicle': 'Vehicle Spares',
-  'specialised-contracts': 'Contracts',
+  'office-institutional': 'General & Institutional Supplies',
+  'motor-vehicle': 'Motor Vehicle Accessories & Spares',
+  'specialised-contracts': 'Specialized Supply Contracts',
 };
 
 const imageAltMap: Record<string, string> = {
