@@ -149,7 +149,16 @@ export default function CTABanner() {
           </div>
 
           {/* ── Why Us panel ── */}
-          <div className="bg-white p-8 sm:p-10 lg:p-12 flex flex-col border-t lg:border-t-0 lg:border-l border-slate-100 relative overflow-hidden">
+          <div className="bg-white p-8 sm:p-10 lg:p-12 flex flex-col border-t lg:border-t-0 lg:border-l border-slate-200 relative overflow-hidden">
+
+            {/* Background subtle pattern */}
+            <div
+              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(circle, #801525 1px, transparent 1px)',
+                backgroundSize: '28px 28px',
+              }}
+            />
 
             {/* Social row */}
             <div className="flex items-center gap-3 shrink-0 relative z-10">
@@ -164,11 +173,14 @@ export default function CTABanner() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-colors"
+                  className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/40 transition-colors"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
+
+              {/* Live badge */}
+              
             </div>
 
             {/* Headline */}
@@ -188,21 +200,21 @@ export default function CTABanner() {
               {PROMISES.map(({ icon: Icon, title, detail }) => (
                 <div
                   key={title}
-                  className="promise-card group flex items-start gap-4 p-4 rounded-lg border border-slate-100 bg-slate-50 hover:bg-slate-100 hover:border-slate-200 transition-all duration-300 cursor-default"
+                  className="promise-card group flex items-start gap-4 p-4 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-200 transition-all duration-300 cursor-default"
                 >
                   <div
                     className="shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-                    style={{ background: 'rgba(128,21,37,0.08)' }}
+                    style={{ background: 'rgba(128,21,37,0.1)' }}
                   >
                     <Icon className="w-4 h-4 text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-[13px] font-bold text-slate-800 leading-snug">{title}</p>
-                    <p className="mt-1 text-[12px] leading-relaxed text-slate-500 max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-out">
+                    <p className="mt-1 text-[12px] leading-relaxed text-slate-400 max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-out">
                       {detail}
                     </p>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-300 shrink-0 mt-0.5 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300" />
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-200 shrink-0 mt-0.5 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300" />
                 </div>
               ))}
             </div>

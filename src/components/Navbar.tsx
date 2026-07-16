@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Mail, Search } from "lucide-react";
 import { companyInfo, navLinks } from "@/data/siteData";
 import logoImg from "@/assets/logo.png";
+import KenyanFlag from "@/assets/kenya.webp";
 import { SearchModal } from "@/components/SearchModal";
 
 export default function Navbar() {
@@ -71,7 +72,7 @@ export default function Navbar() {
             <div className="flex items-center gap-6" style={{ color: "#555" }}>
               <span className="flex items-center gap-2">
                 <img
-                  src="src/assets/kenya.webp"
+                  src={KenyanFlag}
                   alt="Kenya flag"
                   className="w-7 h-7 rounded-full object-cover ring-1 ring-black/10 shrink-0"
                 />

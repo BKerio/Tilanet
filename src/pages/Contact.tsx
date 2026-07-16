@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { Mail, Clock, Send, CheckCircle } from 'lucide-react';
 import { companyInfo } from '@/data/siteData';
 import PageHero from '@/components/PageHero';
 
@@ -47,8 +47,8 @@ export default function Contact() {
             <div className="lg:col-span-1">
               <div className="contact-info-grid space-y-4">
                 {[
-                  { icon: MapPin, label: 'Address', value: companyInfo.address },
-                  { icon: Phone, label: 'Phone', value: companyInfo.phone, href: `tel:${companyInfo.phone}` },
+                  // { icon: MapPin, label: 'Address', value: companyInfo.address },
+                  // { icon: Phone, label: 'Phone', value: companyInfo.phone, href: `tel:${companyInfo.phone}` },
                   { icon: Mail, label: 'Email', value: companyInfo.email, href: `mailto:${companyInfo.email}` },
                 ].map(({ icon: Icon, label, value, href }) => (
                   <div key={label} className="contact-info-card flex items-start gap-4 p-5 bg-[#f8f6f1] border border-[#e1e2e7]">
