@@ -10,7 +10,7 @@ import varsNSonn from '@/assets/Client/vns_logo.png';
 import kaa from '@/assets/Client/kaa.png';
 import cooperativeBank from '@/assets/Client/cooperative bank.png';
 import kenyaPorts from '@/assets/Client/kpa.png';
-import elegance from '@/assets/Client/elegance.png';y
+import elegance from '@/assets/Client/elegance.png';
 import millenium from '@/assets/Client/millenium.png';
 import nairobiwater from '@/assets/Client/nairobiwater.png';
 
