@@ -20,7 +20,7 @@ export default function Services() {
       <PageHero
         eyebrow="Our Services"
         title="General Supply Products & Services"
-        description="From everyday office essentials to motor vehicle spares and specialised institutional contracts — Tila-Net delivers quality products at fair prices, on time."
+        description="From everyday office essentials to motor vehicle spares and specialised institutional contracts - Tila-Net delivers quality products at fair prices, on time."
       />
 
       <div className="bg-charcoal text-white py-6 border-y border-white/10 overflow-hidden relative">
@@ -50,7 +50,7 @@ export default function Services() {
               </h2>
               <p className="mt-4 text-[15px] leading-[30px] text-[#6f7174]">
                 We combine a wide product range, competitive pricing, and dependable delivery
-                so your organisation gets what it needs — without procurement headaches.
+                so your organisation gets what it needs - without procurement headaches.
               </p>
               <ul className="mt-8 space-y-4">
                 {whyChooseUs.map((item) => (

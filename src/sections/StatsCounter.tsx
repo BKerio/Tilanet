@@ -32,7 +32,7 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   }, [value]);
 
   return (
-    <div ref={counterRef} className="text-4xl sm:text-5xl font-bold text-golden tracking-tight">
+    <div ref={counterRef} className="text-4xl sm:text-5xl font-extrabold text-black tracking-tight">
       {count}{suffix}
     </div>
   );
@@ -53,7 +53,7 @@ export default function StatsCounter() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative section-padding bg-charcoal overflow-hidden">
+    <section ref={sectionRef} className="relative section-padding bg-white overflow-hidden border-t border-slate-100">
       <div className="container-custom relative z-10">
         <SectionTitle
           eyebrow="Our Track Record"
@@ -65,8 +65,8 @@ export default function StatsCounter() {
           {stats.map((stat) => (
             <div key={stat.label} className="stat-item text-center group">
               <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              <div className="text-[#808287] text-[13px] mt-2 uppercase tracking-[0.08em] group-hover:text-golden transition-colors">{stat.label}</div>
-              <div className="w-8 h-px bg-golden/30 mx-auto mt-4 group-hover:w-12 group-hover:bg-golden transition-all duration-300" />
+              <div className="text-slate-600 text-[13px] mt-2 font-semibold uppercase tracking-[0.08em] group-hover:text-primary transition-colors">{stat.label}</div>
+              <div className="w-8 h-px bg-slate-200 mx-auto mt-4 group-hover:w-12 group-hover:bg-primary transition-all duration-300" />
             </div>
           ))}
         </div>

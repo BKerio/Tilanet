@@ -1,44 +1,10 @@
 /* eslint-disable react-hooks/set-state-in-effect */
-import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Mail, MapPin, Linkedin, Twitter, Facebook, Search } from 'lucide-react';
-import { companyInfo, navLinks } from '@/data/siteData';
-import logoImg from '@/assets/logo.png';
-import { SearchModal } from '@/components/SearchModal';
-
-function SocialLinks({ className = '' }: { className?: string }) {
-  return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <a
-        href={companyInfo.social.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-colors"
-        aria-label="LinkedIn"
-      >
-        <Linkedin className="w-3.5 h-3.5" />
-      </a>
-      <a
-        href={companyInfo.social.twitter}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-colors"
-        aria-label="Twitter"
-      >
-        <Twitter className="w-3.5 h-3.5" />
-      </a>
-      <a
-        href={companyInfo.social.facebook}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-colors"
-        aria-label="Facebook"
-      >
-        <Facebook className="w-3.5 h-3.5" />
-      </a>
-    </div>
-  );
-}
+import { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Phone, Mail, MapPin, Search } from "lucide-react";
+import { companyInfo, navLinks } from "@/data/siteData";
+import logoImg from "@/assets/logo.png";
+import { SearchModal } from "@/components/SearchModal";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,192 +13,211 @@ export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const lastScrollYRef = useRef(0);
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === "/";
 
-  // Hide-on-scroll-down / show-on-scroll-up
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 24);
-
-      const lastScrollY = lastScrollYRef.current;
-      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+      if (y > lastScrollYRef.current && y > 120) {
         if (!isOpen) setVisible(false);
       } else {
         setVisible(true);
       }
-      lastScrollYRef.current = currentScrollY;
+      lastScrollYRef.current = y;
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setIsOpen(false); }, [location.pathname]);
 
   const isActive = (href: string) => location.pathname === href;
 
-  const navBg =
-    scrolled || !isHome
-      ? 'bg-white/95 backdrop-blur-md border-b border-black/8'
-      : 'bg-white';
+  // Transparent ONLY on home page when at top — same as OneTrack style-1 two
+  const transparent = isHome && !scrolled;
 
-  const desktopNavLinks = navLinks.filter((l) => l.label !== 'Contact Us');
-  const mobileNavLinks = navLinks.filter((l) => l.label !== 'Contact Us');
+  const mainLinks = navLinks.filter((l) => l.label !== "Contact Us");
 
   return (
     <>
-      {/* ─── Fixed Header ─── */}
+      {/* ═══════════════════════════════════════
+          FIXED HEADER  (OneTrack header.style-1.two)
+      ════════════════════════════════════════ */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${navBg} ${
-          visible
-            ? 'translate-y-0 opacity-100'
-            : '-translate-y-full opacity-0 pointer-events-none'
-        }`}
+        className="fixed inset-x-0 top-0 z-50 transition-all duration-500"
+        style={{
+          background: transparent ? "transparent" : "#ffffff",
+          boxShadow: transparent ? "none" : "0 2px 24px rgba(0,0,0,0.10)",
+          transform: visible ? "translateY(0)" : "translateY(-100%)",
+          opacity: visible ? 1 : 0,
+        }}
       >
-        <div className="container-custom">
-          <div className="flex h-[76px] items-center justify-between">
+        {/* ── Topbar (always visible, adapts color) ── */}
+        <div
+          className="hidden lg:block border-b transition-colors duration-500"
+          style={{
+            borderColor: transparent ? "rgba(0,0,0,0.05)" : "rgba(0,0,0,0.07)",
+            background: transparent ? "transparent" : "#f8f8f8",
+          }}
+        >
+          <div className="container-custom flex items-center justify-between h-[44px] text-[13px]">
+            {/* Left: location + email */}
+            <div className="flex items-center gap-6" style={{ color: "#555" }}>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                Upperhill, Nairobi, Kenya
+              </span>
+              
+            </div>
+            {/* Right: phone */}
+            <div className="flex items-center gap-4" style={{ color: "#555" }}>
+              <a
+                href={`mailto:${companyInfo.email}`}
+                className="flex items-center gap-1.5 hover:text-primary transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
+                {companyInfo.email}
+              </a>
+            </div>
+          </div>
+        </div>
 
-            {/* Logo — raw, bigger, no card wrapper */}
-            <Link to="/" className="flex items-center shrink-0" aria-label="Tilanet Home">
+        {/* ── Main nav row ── */}
+        <div className="container-custom">
+          <div
+            className="flex items-center justify-between transition-all duration-300"
+            style={{ height: scrolled ? "80px" : "120px" }}
+          >
+            {/* Logo */}
+            <Link to="/" aria-label="Tilanet Home" className="shrink-0 flex items-center">
               <img
                 src={logoImg}
+                alt="Tilanet"
                 draggable={false}
-                alt="Tilanet Logo"
-                className="h-24 sm:h-32 lg:h-36 w-auto object-contain"
+                className="w-auto object-contain transition-all duration-500"
+                style={{
+                  height: scrolled ? "68px" : "104px",
+                  filter: "none",
+                }}
               />
             </Link>
 
-            {/* Desktop nav links — uppercase, reference-style */}
-            <nav className="hidden lg:flex items-center gap-10">
-              {desktopNavLinks.map((link) => (
+            {/* Desktop nav */}
+            <nav className="hidden lg:flex items-center gap-8">
+              {mainLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-[13px] font-semibold uppercase tracking-[0.18em] transition-opacity duration-200 text-[#1a1b1f] ${
-                    isActive(link.href) ? 'opacity-100' : 'opacity-55 hover:opacity-100'
-                  }`}
+                  className="text-[15px] font-bold uppercase tracking-wider transition-colors duration-300 hover:text-primary"
+                  style={{ color: isActive(link.href) ? "var(--color-primary, #801525)" : "#111111" }}
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
 
-            {/* Right — Search + "Talk to us" (serif italic) + mobile burger */}
+            {/* Right controls */}
             <div className="flex items-center gap-4 shrink-0">
+              {/* Search */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-[#1a1b1f] hover:text-primary transition-colors"
                 aria-label="Search"
+                className="hidden sm:flex p-2 hover:text-primary transition-colors"
+                style={{ color: "#111111" }}
               >
-                <Search className="h-5 w-5" />
+                <Search className="w-5 h-5" />
               </button>
+
+              {/* Get a Quote CTA — solid orange, square, no radius */}
               <Link
                 to="/contact"
-                className="hidden sm:inline-flex items-center justify-center h-10 px-7 rounded-full bg-primary text-primary-foreground text-[15px] font-normal italic font-serif shadow-[0_8px_24px_rgba(245,130,32,0.30)] hover:bg-primary-dark transition-all duration-200"
+                className="hidden lg:inline-flex items-center justify-center gap-2 font-bold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#111111]"
+                style={{ height: "48px", padding: "0 1.75rem", background: "var(--color-primary, #801525)", fontSize: "13px" }}
               >
-                Talk to us
+                Get a Quote
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.83333 4.16667V0H4.16667V4.16667H0V5.83333H4.16667V10H5.83333V5.83333H10V4.16667H5.83333Z" />
+                </svg>
               </Link>
+
+              {/* Mobile burger */}
               <button
                 onClick={() => setIsOpen(true)}
-                className="lg:hidden p-2 text-[#1a1b1f]"
                 aria-label="Open menu"
+                className="lg:hidden p-2 transition-colors"
+                style={{ color: "#111111" }}
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="w-6 h-6" />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* ─── Spacer so page content clears the fixed navbar ─── */}
-      <div className="h-[76px]" aria-hidden="true" />
+      {/* Spacer for non-home pages (home page hero is under the transparent nav) */}
+      {!isHome && <div style={{ height: "132px" }} aria-hidden="true" />}
 
-      {/* ─── Mobile fullscreen dark overlay ─── */}
+      {/* ═══════════════════════════════════════
+          MOBILE FULLSCREEN MENU
+      ════════════════════════════════════════ */}
       <div
-        className={`fixed inset-0 z-[100] lg:hidden bg-[#1a1b1f] transition-all duration-300 ${
-          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-        }`}
+        className="fixed inset-0 z-[100] lg:hidden flex flex-col bg-[#111111] transition-all duration-300"
+        style={{ opacity: isOpen ? 1 : 0, visibility: isOpen ? "visible" : "hidden", pointerEvents: isOpen ? "auto" : "none" }}
         aria-hidden={!isOpen}
       >
-        <div className="flex flex-col h-full">
+        {/* Close */}
+        <div className="flex items-center justify-between px-6 pt-6 pb-4">
+          <img src={logoImg} alt="Tilanet" className="h-12 w-auto object-contain brightness-0 invert" draggable={false} />
+          <button
+            onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
+            className="w-11 h-11 border border-white/20 flex items-center justify-center text-white hover:border-white/50 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
 
-          {/* Close button row */}
-          <div className="flex items-center justify-end px-6 pt-6 pb-2">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center text-white hover:border-white/30 transition-colors"
-              aria-label="Close menu"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Nav links — centered */}
-          <nav className="flex-1 flex flex-col items-center justify-center px-8 pb-12 -mt-6">
-            <ul className="flex flex-col items-center gap-7 sm:gap-8 w-full max-w-xs">
-              {mobileNavLinks.map((link) => (
-                <li key={link.href} className="w-full text-center">
-                  <Link
-                    to={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`block text-[15px] sm:text-base uppercase tracking-[0.22em] font-semibold transition-colors duration-200 ${
-                      isActive(link.href)
-                        ? 'text-primary'
-                        : 'text-white/70 hover:text-white'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Mobile CTA */}
-            <Link
-              to="/contact"
-              onClick={() => setIsOpen(false)}
-              className="mt-12 sm:mt-14 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-10 py-4 text-[13px] sm:text-sm font-bold uppercase tracking-[0.18em] shadow-[0_8px_30px_rgba(245,130,32,0.35)] hover:bg-primary-dark transition-colors duration-300"
-            >
-              Talk to us
-            </Link>
-          </nav>
-
-          {/* Mobile footer — contact info + social */}
-          <div className="px-6 pb-8 pt-4 border-t border-white/[0.06]">
-            <div className="flex flex-col items-center gap-4 text-center">
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[12px] text-white/50">
-                <a
-                  href={`tel:${companyInfo.phone.replace(/\s/g, '')}`}
-                  className="inline-flex items-center gap-2 hover:text-white transition-colors"
+        {/* Nav links */}
+        <nav className="flex-1 flex flex-col items-center justify-center px-8 pb-16 -mt-4">
+          <ul className="flex flex-col items-center gap-8 w-full max-w-xs">
+            {mainLinks.map((link) => (
+              <li key={link.href} className="w-full text-center">
+                <Link
+                  to={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block text-[16px] uppercase tracking-[0.2em] font-bold transition-colors duration-200"
+                  style={{ color: isActive(link.href) ? "var(--color-primary, #801525)" : "rgba(255,255,255,0.7)" }}
                 >
-                  <Phone className="w-3.5 h-3.5 text-primary" />
-                  {companyInfo.phone}
-                </a>
-                <a
-                  href={`mailto:${companyInfo.email}`}
-                  className="inline-flex items-center gap-2 hover:text-white transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5 text-primary" />
-                  {companyInfo.email}
-                </a>
-              </div>
-              <div className="flex items-center gap-2 text-[11px] text-white/40">
-                <MapPin className="w-3 h-3 text-primary shrink-0" />
-                <span>Upperhill, Nairobi, Kenya</span>
-              </div>
-              <SocialLinks className="justify-center" />
-            </div>
-          </div>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            to="/contact"
+            onClick={() => setIsOpen(false)}
+            className="mt-12 inline-flex items-center justify-center gap-3 text-white font-bold uppercase tracking-widest transition-colors"
+            style={{ height: "54px", padding: "0 2.5rem", background: "var(--color-primary, #801525)", fontSize: "13px" }}
+          >
+            Get a Quote
+          </Link>
+        </nav>
+
+        {/* Mobile footer */}
+        <div className="px-6 pb-8 pt-4 border-t border-white/10 flex flex-col items-center gap-3 text-[13px] text-white/50">
+          <a href={`tel:${companyInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-white transition-colors">
+            <Phone className="w-4 h-4 text-primary" /> {companyInfo.phone}
+          </a>
+          <a href={`mailto:${companyInfo.email}`} className="flex items-center gap-2 hover:text-white transition-colors">
+            <Mail className="w-4 h-4 text-primary" /> {companyInfo.email}
+          </a>
         </div>
       </div>
 

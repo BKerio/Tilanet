@@ -25,7 +25,6 @@ export const navLinks = [
   },
   { label: 'Industries', href: '/industries' },
   { label: 'Process', href: '/process' },
-  { label: 'Clients', href: '/clients' },
   { label: 'Contact Us', href: '/contact' },
 ];
 
@@ -301,7 +300,7 @@ export const industryMarketShare = [
   { name: 'Media & Entertainment', value: 4, color: '#7030A0' },
   { name: 'Pharmaceuticals', value: 5, color: '#C00000' },
   { name: 'Insurance', value: 6, color: '#548235' },
-  { name: 'Education', value: 5, color: '#F58220' },
+  { name: 'Education', value: 5, color: '#801525' },
   { name: 'Travel & Transportation', value: 4, color: '#1F4E79' },
   { name: 'Automotive', value: 7, color: '#5B9BD5' },
   { name: 'Healthcare', value: 5, color: '#9BBB59' },

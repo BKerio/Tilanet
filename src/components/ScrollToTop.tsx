@@ -44,7 +44,7 @@ export default function ScrollToTop() {
       aria-label="Scroll to top"
       className={`
         fixed bottom-6 right-6 z-[60] w-12 h-12 sm:w-14 sm:h-14
-        rounded-full bg-charcoal/95 backdrop-blur-md text-white
+        rounded-full bg-[#801525] backdrop-blur-md text-white
         border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.3)]
         flex items-center justify-center
         transition-all duration-500 ease-in-out
@@ -67,7 +67,7 @@ export default function ScrollToTop() {
           cx="50%"
           cy="50%"
           r={radius}
-          className="stroke-[#10b981] fill-none transition-all duration-75"
+          className="stroke-white fill-none transition-all duration-75"
           strokeWidth="3"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}

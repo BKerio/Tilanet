@@ -88,7 +88,7 @@ export const AccessibilityMenu = () => {
       onClick={onClick}
       className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-all ${
         active 
-          ? 'bg-orange-50 border-orange-500 text-orange-700 dark:bg-orange-900/30 dark:border-orange-400 dark:text-orange-300' 
+          ? 'bg-primary/10 border-primary text-primary dark:bg-primary/20 dark:border-primary/50 dark:text-primary' 
           : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
       }`}
     >
@@ -103,7 +103,7 @@ export const AccessibilityMenu = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed z-50 bottom-12 left-4 p-4 bg-orange-600 hover:bg-orange-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          className="fixed z-50 bottom-12 left-4 p-4 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
           aria-label="Open Accessibility Menu"
         >
           <Accessibility className="w-6 h-6" />
@@ -137,21 +137,21 @@ export const AccessibilityMenu = () => {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b dark:border-gray-800">
-          <div className="flex items-center gap-2 text-orange-600 dark:text-orange-400">
+          <div className="flex items-center gap-2 text-primary">
             <Accessibility className="w-5 h-5" />
             <h2 className="font-semibold text-lg">Accessibility</h2>
           </div>
           <div className="flex items-center gap-2">
             <button 
               onClick={() => { reset(); synth?.cancel(); setIsReading(false); }}
-              className="p-2 text-gray-500 hover:text-orange-600 transition-colors"
+              className="p-2 text-gray-500 hover:text-primary transition-colors"
               title="Reset Settings"
             >
               <RotateCcw className="w-4 h-4" />
             </button>
             <button 
               onClick={() => setIsOpen(false)}
-              className="p-2 text-gray-500 hover:text-orange-500 transition-colors"
+              className="p-2 text-gray-500 hover:text-primary transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -169,7 +169,7 @@ export const AccessibilityMenu = () => {
                 onClick={() => dispatch({ scale })}
                 className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${
                   state.scale === scale 
-                    ? 'bg-white dark:bg-gray-700 shadow text-orange-600 dark:text-orange-400' 
+                    ? 'bg-white dark:bg-gray-700 shadow text-primary' 
                     : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
                 }`}
               >
@@ -224,7 +224,7 @@ export const AccessibilityMenu = () => {
             onClick={() => setIsShortcutsOpen(true)}
             className="w-full mt-4 flex flex-col items-center justify-center p-4 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-all"
           >
-            <Keyboard className="w-6 h-6 mb-2 text-orange-600 dark:text-orange-400" />
+            <Keyboard className="w-6 h-6 mb-2 text-primary" />
             <span className="text-sm font-medium">Shortcuts</span>
           </button>
           
@@ -237,7 +237,7 @@ export const AccessibilityMenu = () => {
           <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in duration-200">
             <div className="flex items-center justify-between p-4 border-b dark:border-gray-800">
               <div className="flex items-center gap-2">
-                <Keyboard className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                <Keyboard className="w-5 h-5 text-primary" />
                 <h3 className="font-semibold text-gray-900 dark:text-white">Shortcuts</h3>
               </div>
               <button 

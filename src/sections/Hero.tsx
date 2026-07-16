@@ -1,281 +1,320 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
+
+const SLIDE_DURATION = 8000
+const STAT_REFRESH_INTERVAL = 10000
 
 type HeroSlide = {
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  highlights: string[];
-  primaryCta: { label: string; href: string };
-  secondaryCta: { label: string; href: string };
-  proof: { value: string; label: string };
-  images: {
-    center: { src: string; alt: string }; 
-    bottomLeft: { src: string; alt: string }; 
-    topRight: { src: string; alt: string };
-    bottomRight: { src: string; alt: string };
-  };
-};
+  eyebrow: string
+  title: string
+  description: string
+  src: string
+  alt: string
+  statIndex: number
+}
 
-const slides: HeroSlide[] = [
+const heroSlides: HeroSlide[] = [
   {
-    eyebrow: 'General supplier · Nairobi, Kenya',
-    title: 'The supplier you can always count on.',
-    subtitle:
-      'Tila-Net Enterprises Limited offers a comprehensive range of general supply products and services — from everyday office essentials to specialised technical and institutional supplies.',
-    highlights: ['Office & institutional supplies', 'Motor vehicle spares', 'Specialised contracts'],
-    primaryCta: { label: 'Request a Quote', href: '/contact' },
-    secondaryCta: { label: 'Our Services', href: '/services' },
-    proof: { value: '30+', label: 'Organizations supplied' },
-    images: {
-      center: { src: '/hero-mombasa-containers.jpg', alt: 'Shipping containers at Mombasa port, Kenya' },
-      bottomLeft: { src: '/hero-africa-business-team.jpg', alt: 'African business team reviewing supply orders' },
-      topRight: { src: '/hero-warehouse-boxes.jpg', alt: 'Warehouse stocked with supply boxes' },
-      bottomRight: { src: '/hero-kenya-trucks.jpg', alt: 'Delivery trucks on a highway in Kenya' },
-    },
+    eyebrow: "Global Supply Network",
+    title: "The supplier you can always count on.",
+    description: "We are dynamic, customer-centric general suppliers dedicated to delivering efficient and timely procurement for businesses, parastatals, and government institutions worldwide.",
+    src: "/hero-mombasa-containers.jpg",
+    alt: "Shipping containers at Mombasa port, Kenya",
+    statIndex: 0,
   },
   {
-    eyebrow: 'Beyond the brief',
-    title: 'Right products. Right price. On time, every time.',
-    subtitle:
-      'We treat every order as a commitment, not just a transaction. Share your requirements and we will source, price, and deliver — for individuals, businesses, parastatals, and government institutions.',
-    highlights: ['Competitive pricing', 'Timely delivery', 'After-sales support'],
-    primaryCta: { label: 'Get a Quote', href: '/contact' },
-    secondaryCta: { label: 'View Services', href: '/services' },
-    proof: { value: '40+', label: 'Successful deliveries' },
-    images: {
-      center: { src: '/hero-container-yard.jpg', alt: 'Aerial view of shipping container yard' },
-      bottomLeft: { src: '/hero-africa-meeting.jpg', alt: 'African professionals coordinating procurement' },
-      topRight: { src: '/hero-cargo-crates.jpg', alt: 'Cargo crates ready for distribution' },
-      bottomRight: { src: '/hero-africa-businessman.jpg', alt: 'African businessman managing supply orders' },
-    },
+    eyebrow: "Procurement Optimization",
+    title: "Right products. Right price. On time.",
+    description: "We treat every order as a commitment, not just a transaction. Share your requirements and we will source, price, and deliver - reliably, consistently, and at scale.",
+    src: "/hero-container-yard.jpg",
+    alt: "Aerial view of shipping container yard",
+    statIndex: 1,
   },
   {
-    eyebrow: 'Specialised supply contracts',
-    title: 'Tailored contracts for institutions and enterprises.',
-    subtitle:
-      'For parastatals, private companies, and government institutions, Tila-Net offers bulk and framework supply agreements with dependable delivery and consistent quality.',
-    highlights: ['Framework agreements', 'Bulk supply contracts', 'Institutional supply'],
-    primaryCta: { label: 'Talk to Our Team', href: '/contact' },
-    secondaryCta: { label: 'How We Work', href: '/process' },
-    proof: { value: '100%', label: 'Client commitment' },
-    images: {
-      center: { src: '/hero-warehouse-boxes.jpg', alt: 'Bulk supply stored in warehouse' },
-      bottomLeft: { src: '/hero-africa-business-team.jpg', alt: 'Account team supporting contract supply' },
-      topRight: { src: '/hero-mombasa-containers.jpg', alt: 'Import and export logistics in East Africa' },
-      bottomRight: { src: '/hero-cargo-crates.jpg', alt: 'Inventory ready for recurring deliveries' },
-    },
+    eyebrow: "Public-Private Frameworks",
+    title: "Tailored contracts & bulk agreements.",
+    description: "For parastatals, private companies, and government institutions, Tila-Net offers bulk and framework supply agreements with dependable delivery and rigorous quality control.",
+    src: "/hero-warehouse-boxes.jpg",
+    alt: "Bulk supply stored in warehouse",
+    statIndex: 2,
   },
-];
+]
+
+const heroStats = [
+  { value: 30, suffix: '+', label: 'Organizations supplied', detail: 'Serving top-tier institutions across Africa with reliable supply chains.' },
+  { value: 100, suffix: '%', label: 'Repeat customers', detail: 'Our commitment to quality ensures long-term partnerships.' },
+  { value: 40, suffix: '+', label: 'Successful deliveries', detail: 'Timely and accurate execution of bulk procurement orders.' },
+  { value: 24, suffix: '/7', label: 'Support availability', detail: 'Always online to handle urgent supply requests.' },
+]
+
+const marqueeItems = [
+  'General Supplies',
+  'Procurement',
+  'Logistics',
+  'Framework Agreements',
+  'Bulk Sourcing',
+  'Tila-Net Enterprises',
+  'Quality Assured',
+  'Timely Delivery',
+]
+
+function useCountUp(target: number, trigger: number, duration = 1200) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    let frame: number
+    const startTime = performance.now()
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.round(target * eased))
+      if (progress < 1) frame = requestAnimationFrame(tick)
+    }
+
+    setCount(0)
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [target, trigger, duration])
+
+  return count
+}
+
+function StatCard({
+  stat,
+  isHighlighted,
+  refreshKey,
+  onSelect,
+}: {
+  stat: (typeof heroStats)[number]
+  isHighlighted: boolean
+  refreshKey: number
+  onSelect: () => void
+}) {
+  const count = useCountUp(stat.value, isHighlighted ? refreshKey : 0)
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className={`group relative w-full border p-4 text-left transition-all duration-300 ${
+        isHighlighted
+          ? 'border-slate-900/25 bg-slate-50'
+          : 'border-black/10 bg-transparent hover:border-black/20 hover:bg-slate-50/50'
+      }`}
+    >
+      <div className="text-2xl font-bold tracking-tight text-slate-900">
+        {isHighlighted ? count : stat.value}
+        {stat.suffix}
+      </div>
+      <p className="mt-1 text-[11px] uppercase tracking-widest text-slate-500 font-semibold">
+        {stat.label}
+      </p>
+      <p
+        className={`mt-2 text-[13px] leading-relaxed text-slate-500 transition-all duration-300 ${
+          isHighlighted
+            ? 'max-h-20 opacity-100'
+            : 'max-h-0 overflow-hidden opacity-0 group-hover:max-h-20 group-hover:opacity-100'
+        }`}
+      >
+        {stat.detail}
+      </p>
+    </button>
+  )
+}
 
 export default function Hero() {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeStat, setActiveStat] = useState<number | null>(null)
+  const [statCycleIndex, setStatCycleIndex] = useState(0)
+  const [statRefreshKey, setStatRefreshKey] = useState(0)
+  const [paused, setPaused] = useState(false)
 
-  const goToSlide = useCallback((index: number) => {
-    const next = ((index % slides.length) + slides.length) % slides.length;
-    setActiveSlide(next);
-  }, []);
+  const slide = heroSlides[activeIndex]
+  const highlightedStat = activeStat ?? statCycleIndex
 
-  const nextSlide = useCallback(() => goToSlide(activeSlide + 1), [activeSlide, goToSlide]);
-  const prevSlide = useCallback(() => goToSlide(activeSlide - 1), [activeSlide, goToSlide]);
+  useEffect(() => {
+    if (paused) return undefined
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % heroSlides.length)
+      setActiveStat(null)
+    }, SLIDE_DURATION)
+
+    return () => window.clearInterval(timer)
+  }, [paused, activeIndex])
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setActiveSlide((s) => (s + 1) % slides.length);
-    }, 6500);
-    return () => window.clearInterval(timer);
-  }, []);
+      setStatCycleIndex((current) => (current + 1) % heroStats.length)
+      setStatRefreshKey((key) => key + 1)
+      setActiveStat(null)
+    }, STAT_REFRESH_INTERVAL)
 
-  const slide = slides[activeSlide];
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const goTo = (index: number) => {
+    setActiveIndex((index + heroSlides.length) % heroSlides.length)
+    setActiveStat(null)
+  }
+
+  const selectStat = (index: number) => {
+    setActiveStat(index)
+    setStatCycleIndex(index)
+    setStatRefreshKey((key) => key + 1)
+    const relatedSlide = heroSlides.findIndex((s) => s.statIndex === index)
+    if (relatedSlide >= 0) setActiveIndex(relatedSlide)
+  }
 
   return (
-    <section className="bg-white flex items-center overflow-hidden">
-      <div className="container-custom w-full py-10 sm:py-14">
-        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-12 items-center">
+    <section className="relative min-h-[100svh] overflow-hidden bg-[#fcfdfd] text-slate-900 flex flex-col" style={{ paddingTop: 0 }}>
+      <div className="relative z-10 flex flex-1 flex-col justify-center">
+        {/* Spacer: mobile = 120px nav, desktop = 44px topbar + 120px nav = 164px */}
+        <div className="h-[120px] lg:h-[164px] shrink-0" aria-hidden="true" />
+        <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:pb-16 w-full">
+          <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
+            
+            {/* ── Left content ── */}
+            <div className="flex flex-col justify-center">
+              
+              {/* Stats Section (Replaces Geo Locations) */}
+              <div className="mb-12">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-5">By the numbers</p>
+                <div className="grid grid-cols-2 gap-4">
+                  {heroStats.map((stat, index) => (
+                    <StatCard
+                      key={stat.label}
+                      stat={stat}
+                      isHighlighted={highlightedStat === index}
+                      refreshKey={statRefreshKey}
+                      onSelect={() => selectStat(index)}
+                    />
+                  ))}
+                </div>
+              </div>
 
-          {/* ─── LEFT: Copy block ─── */}
-          <div className="max-w-xl">
-            {/* Eyebrow */}
-            <p className="text-[11px] tracking-[0.18em] uppercase font-bold text-[#1a1b1f]/55 mb-4">
-              {slide.eyebrow}
-            </p>
+              {/* Dynamic copy */}
+              <div key={activeIndex} className="flex-1 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="mb-6 flex items-center gap-4">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-primary">{slide.eyebrow}</span>
+                  <span className="h-px w-10 bg-slate-200" />
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400">
+                    {String(activeIndex + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}
+                  </span>
+                </div>
 
-            {/* Headline */}
-            <h1 className="text-[36px] sm:text-[46px] lg:text-[52px] leading-[1.06] font-extrabold tracking-tight text-[#1a1b1f]">
-              {slide.title}
-            </h1>
+                <h1 className="text-slate-900 font-bold tracking-tight text-balance leading-[1.05]" style={{ fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)" }}>
+                  {slide.title}
+                </h1>
 
-            {/* Body */}
-            <p className="mt-4 text-[15px] sm:text-[16px] leading-[1.7] font-semibold text-[#1a1b1f]/75">
-              {slide.subtitle}
-            </p>
+                <p className="mt-5 max-w-md text-[16px] sm:text-[17px] font-medium leading-relaxed text-slate-500">
+                  {slide.description}
+                </p>
+              </div>
 
-            {/* Supply highlights */}
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {slide.highlights.map((item) => (
-                <li
-                  key={item}
-                  className="inline-flex items-center rounded-full border border-[#1a1b1f]/12 bg-[#f8f6f1] px-3 py-1.5 text-[12px] font-semibold text-[#1a1b1f]/80"
+              {/* CTAs */}
+              <div className="mt-10 flex flex-wrap items-center gap-6 pb-10 lg:pb-0">
+                <Link
+                  to="/about"
+                  className="group inline-flex items-center gap-3 bg-slate-900 px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-white transition-all hover:bg-primary hover:-translate-y-0.5"
                 >
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA Buttons */}
-            <div className="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <Link
-                to={slide.primaryCta.href}
-                id="hero-cta-primary"
-                className="inline-flex items-center justify-center h-[48px] px-7 rounded-full bg-primary text-primary-foreground text-[14px] font-bold shadow-[0_10px_28px_rgba(245,130,32,0.28)] hover:bg-primary-dark transition-all duration-200"
-              >
-                {slide.primaryCta.label}
-              </Link>
-              <Link
-                to={slide.secondaryCta.href}
-                id="hero-cta-secondary"
-                className="inline-flex items-center justify-center h-[48px] px-7 rounded-full border-2 border-[#1a1b1f]/25 text-[#1a1b1f] text-[14px] font-bold hover:border-[#1a1b1f]/50 hover:bg-black/[0.04] transition-all duration-200"
-              >
-                {slide.secondaryCta.label}
-              </Link>
+                  Explore Capabilities
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link to="/contact" className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-widest text-slate-500 hover:text-primary transition-colors">
+                  Get a Quote
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
 
-            {/* Social proof row */}
-            <div className="mt-7 flex items-center gap-4">
-              <div className="flex -space-x-3">
-                {['/hero-africa-businessman.jpg', '/hero-africa-business-team.jpg', '/hero-africa-meeting.jpg'].map((src, i) => (
+            {/* ── Right content: Main image ── */}
+            <div
+              className="relative flex flex-col justify-center pb-10 lg:pb-0 lg:-mt-16"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              <div className="relative w-full aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/5] xl:aspect-square overflow-hidden bg-slate-100 rounded-none sm:rounded-lg">
+                {heroSlides.map((s, index) => (
                   <img
-                    key={i}
-                    src={src}
-                    alt="Tilanet client"
-                    className="w-10 h-10 rounded-full border-[3px] border-white object-cover shadow-sm"
-                  />
-                ))}
-              </div>
-              <div>
-                <div className="text-[20px] font-extrabold text-[#1a1b1f] leading-none">
-                  {slide.proof.value}
-                </div>
-                <div className="text-[12px] text-[#1a1b1f]/60 font-semibold mt-0.5">
-                  {slide.proof.label}
-                </div>
-              </div>
-            </div>
-
-            {/* Slider controls */}
-            <div className="mt-6 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={prevSlide}
-                className="w-9 h-9 rounded-full border border-[#1a1b1f]/15 text-[#1a1b1f] hover:bg-black/[0.04] transition-colors"
-                aria-label="Previous slide"
-              >
-                <span aria-hidden="true">‹</span>
-              </button>
-
-              <div className="flex items-center gap-2">
-                {slides.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => goToSlide(i)}
-                    className={`h-2 rounded-full transition-all ${
-                      i === activeSlide ? 'w-7 bg-primary' : 'w-2 bg-[#1a1b1f]/25 hover:bg-[#1a1b1f]/35'
+                    draggable={false}
+                    key={s.src}
+                    src={s.src}
+                    alt={s.alt}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                      index === activeIndex ? 'opacity-100' : 'opacity-0'
                     }`}
-                    aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
-              </div>
+                
+                {/* Image overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
 
-              <button
-                type="button"
-                onClick={nextSlide}
-                className="w-9 h-9 rounded-full border border-[#1a1b1f]/15 text-[#1a1b1f] hover:bg-black/[0.04] transition-colors"
-                aria-label="Next slide"
-              >
-                <span aria-hidden="true">›</span>
-              </button>
-            </div>
-          </div>
-
-          {/* ─── RIGHT: Capsule image collage ─── */}
-          {/*
-            2-sub-column flex layout (matches reference exactly):
-            ┌─────────────────┬──────────────────────┐
-            │ [pill: top 71%] │  [circle: w-full 1:1]│
-            │                 │                      │
-            │ [circle: btm,   │  [capsule: flex-1]   │
-            │  82% w, abs]    │                      │
-            └─────────────────┴──────────────────────┘
-          */}
-          <div
-            className="relative hidden lg:block w-full"
-            style={{ height: 'clamp(480px, 50vw, 550px)' }}
-          >
-            <div className="absolute inset-0 flex gap-4">
-
-              {/* LEFT sub-column (42% wide): tall pill + overlapping bottom circle */}
-              <div className="relative flex-none" style={{ width: '42%' }}>
-
-                {/* ① Tall narrow center pill - top-anchored, full column width */}
-                <div
-                  className="absolute top-0 inset-x-0 overflow-hidden rounded-[9999px] shadow-[0_20px_60px_rgba(0,0,0,0.18)]"
-                  style={{ height: '71%' }}
-                >
-                  <img
-                    src={slide.images.center.src}
-                    alt={slide.images.center.alt}
-                    draggable={false}
-                    className="w-full h-full object-cover object-top transition-opacity duration-500"
-                  />
-                </div>
-
-                {/* ② Bottom-left circle - centered in column, overlaps pill bottom */}
-                <div
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 overflow-hidden rounded-full border-[5px] border-[#f3e6de] shadow-[0_14px_44px_rgba(0,0,0,0.22)] z-10"
-                  style={{ width: '82%', aspectRatio: '1 / 1' }}
-                >
-                  <img
-                    src={slide.images.bottomLeft.src}
-                    alt={slide.images.bottomLeft.alt}
-                    draggable={false}
-                    className="w-full h-full object-cover transition-opacity duration-500"
-                  />
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 pointer-events-none">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/70">{slide.eyebrow}</p>
+                  <p className="mt-2 text-lg font-medium text-white">{slide.alt}</p>
                 </div>
               </div>
 
-              {/* RIGHT sub-column (flex-1): top circle stacked above bottom capsule */}
-              <div className="flex-1 flex flex-col gap-3">
-
-                {/* ③ Top-right circle - fills full column width, height = width (1:1) */}
-                <div
-                  className="w-full flex-none overflow-hidden rounded-full border-[5px] border-[#f3e6de] shadow-[0_14px_44px_rgba(0,0,0,0.16)]"
-                  style={{ aspectRatio: '1 / 1' }}
-                >
-                  <img
-                    src={slide.images.topRight.src}
-                    alt={slide.images.topRight.alt}
-                    draggable={false}
-                    className="w-full h-full object-cover transition-opacity duration-500"
-                  />
+              {/* Navigation Controls */}
+              <div className="mt-6 flex items-center justify-between">
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => goTo(activeIndex - 1)}
+                    className="flex h-12 w-12 items-center justify-center border border-slate-200 transition-colors hover:border-slate-400 text-slate-600 hover:text-slate-900"
+                    aria-label="Previous slide"
+                  >
+                    <ArrowRight className="h-4 w-4 rotate-180" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => goTo(activeIndex + 1)}
+                    className="flex h-12 w-12 items-center justify-center border border-slate-200 transition-colors hover:border-slate-400 text-slate-600 hover:text-slate-900"
+                    aria-label="Next slide"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
                 </div>
 
-                {/* ④ Bottom-right capsule — takes all remaining height */}
-                <div className="flex-1 overflow-hidden rounded-[9999px] shadow-[0_20px_60px_rgba(0,0,0,0.16)]">
-                  <img
-                    src={slide.images.bottomRight.src}
-                    alt={slide.images.bottomRight.alt}
-                    draggable={false}
-                    className="w-full h-full object-cover transition-opacity duration-500"
-                  />
+                <div className="flex gap-2">
+                  {heroSlides.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => goTo(index)}
+                      aria-label={`Go to slide ${index + 1}`}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        index === activeIndex
+                          ? 'w-8 bg-primary'
+                          : 'w-2 bg-slate-200 hover:bg-slate-300'
+                      }`}
+                    />
+                  ))}
                 </div>
-
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
+
+        {/* ── Marquee ── */}
+        <div className="overflow-hidden border-t border-slate-200 py-5 mt-auto bg-white">
+          <div className="flex w-max gap-12 animate-[marquee_40s_linear_infinite]">
+            {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
+              <span
+                key={`${item}-${i}`}
+                className="whitespace-nowrap text-[12px] font-bold uppercase tracking-[0.35em] text-slate-400"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
-  );
+  )
 }

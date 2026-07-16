@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -38,16 +38,16 @@
 
   body {
     @apply bg-white text-charcoal antialiased;
-    font-family: 'Lexend', system-ui, -apple-system, sans-serif;
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
     font-size: 15px;
     line-height: 30px;
     color: #6f7174;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lexend', system-ui, sans-serif;
+    font-family: 'Syne', system-ui, sans-serif;
     color: #18191c;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
   }
 
   ::selection {
@@ -194,7 +194,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F58220;
+  background: #801525;
 }
 
 ::-webkit-scrollbar-thumb:hover {

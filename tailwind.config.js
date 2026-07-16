@@ -11,10 +11,10 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#F58220",
+          DEFAULT: "#801525",
           foreground: "#ffffff",
           dark: "#D96500",
-          light: "#FF9A40",
+          light: "#801525",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -29,7 +29,7 @@ module.exports = {
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "#F58220",
+          DEFAULT: "#801525",
           foreground: "#ffffff",
         },
         popover: {
@@ -51,13 +51,13 @@ module.exports = {
           ring: "hsl(var(--sidebar-ring))",
         },
         golden: {
-          DEFAULT: "#F58220",
+          DEFAULT: "#801525",
           50: "#FFF4E8",
           100: "#FFE4C4",
           200: "#FFC999",
           300: "#FFAD6D",
           400: "#FF9744",
-          500: "#F58220",
+          500: "#801525",
           600: "#D96500",
           700: "#B85000",
           800: "#973D00",
