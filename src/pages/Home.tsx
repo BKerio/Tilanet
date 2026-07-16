@@ -5,6 +5,7 @@ import WhyChooseUs from '@/sections/Why';
 import StatsCounter from '@/sections/StatsCounter';
 import Testimonials from '@/sections/Testimonials';
 import CTABanner from '@/sections/CTABanner';
+import ClientLogos from '@/sections/ClientLogos';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <ServicesGrid />
       <WhyChooseUs />
       <StatsCounter />
+      <ClientLogos />
       <Testimonials />
       <CTABanner />
     </>

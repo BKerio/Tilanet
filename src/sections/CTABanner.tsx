@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Send, CheckCircle, Linkedin, Twitter, Facebook,
-  ShieldCheck, Zap, Globe2, Clock3, ArrowRight
+  ShieldCheck, Zap, Globe2, Clock3,
 } from 'lucide-react';
 import { companyInfo } from '@/data/siteData';
 import SectionTitle from '@/components/SectionTitle';
@@ -15,25 +15,21 @@ const PROMISES = [
     icon: ShieldCheck,
     title: 'Quality Guaranteed',
     detail: 'Every product we source is vetted against international standards before it reaches your hands.',
-    accent: '#801525',
   },
   {
     icon: Zap,
     title: 'Rapid Turnaround',
     detail: 'We move fast - most quotes are returned within 24 hours so you can keep your projects on schedule.',
-    accent: '#801525',
   },
   {
     icon: Globe2,
     title: 'Africa-Wide Network',
     detail: "Deep supplier relationships across East Africa let us source what others can't - at prices that compete globally.",
-    accent: '#801525',
   },
   {
     icon: Clock3,
     title: 'Always Available',
     detail: '24/7 support means your urgent procurement needs never wait until Monday morning.',
-    accent: '#801525',
   },
 ];
 
@@ -83,15 +79,42 @@ export default function CTABanner() {
     if (!sectionRef.current) return;
     const ctx = gsap.context(() => {
       gsap.from('.cta-panel', {
-        opacity: 0, y: 40, duration: 0.8,
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
         scrollTrigger: { trigger: '.cta-panel', start: 'top 85%' },
       });
+
       gsap.from('.promise-card', {
-        opacity: 0, x: 30, stagger: 0.12, duration: 0.6,
-        scrollTrigger: { trigger: '.promise-card', start: 'top 88%' },
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: '.promises-grid',
+          start: 'top 95%',
+          once: true,
+        },
       });
     }, sectionRef);
-    return () => ctx.revert();
+
+    // Fallback: if ScrollTrigger never plays, force cards visible
+    const fallback = window.setTimeout(() => {
+      sectionRef.current
+        ?.querySelectorAll<HTMLElement>('.promise-card')
+        .forEach((el) => {
+          if (getComputedStyle(el).opacity === '0') {
+            gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform' });
+          }
+        });
+    }, 1500);
+
+    return () => {
+      window.clearTimeout(fallback);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -149,18 +172,16 @@ export default function CTABanner() {
           </div>
 
           {/* ── Why Us panel ── */}
-          <div className="bg-white p-8 sm:p-10 lg:p-12 flex flex-col border-t lg:border-t-0 lg:border-l border-slate-200 relative overflow-hidden">
+          <div className="bg-white p-8 sm:p-10 lg:p-12 flex flex-col border-t lg:border-t-0 lg:border-l border-[#e8ecf1] relative">
 
-            {/* Background subtle pattern */}
             <div
-              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              className="absolute inset-0 opacity-[0.03] pointer-events-none"
               style={{
-                backgroundImage: 'radial-gradient(circle, #801525 1px, transparent 1px)',
+                backgroundImage: 'radial-gradient(circle, #111111 1px, transparent 1px)',
                 backgroundSize: '28px 28px',
               }}
             />
 
-            {/* Social row */}
             <div className="flex items-center gap-3 shrink-0 relative z-10">
               {[
                 { href: companyInfo.social.facebook, Icon: Facebook, label: 'Facebook' },
@@ -173,57 +194,49 @@ export default function CTABanner() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/40 transition-colors"
+                  className="w-9 h-9 rounded-full border border-[#e1e2e7] flex items-center justify-center text-[#8a8b90] hover:text-primary hover:border-primary/40 transition-colors"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
 
-              {/* Live badge */}
-              
             </div>
 
-            {/* Headline */}
             <div className="mt-8 relative z-10">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-3">Why choose us</p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-[#6f7174] mb-3">Why choose us</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-charcoal leading-tight">
                 Procurement done{' '}
                 <RotatingWord />
               </h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-slate-500 max-w-sm">
-                We're not just a supplier - we're the partner that shows up, every time.
+              <p className="mt-3 text-[14px] leading-relaxed text-[#6f7174] max-w-sm">
+                We&apos;re not just a supplier - we&apos;re the partner that shows up, every time.
               </p>
             </div>
 
-            {/* Promise cards */}
-            <div className="mt-8 grid grid-cols-1 gap-3 relative z-10 flex-1">
+            {/* Promise cards — 2×2 grid with fade-in */}
+            <div className="promises-grid mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 relative z-10">
               {PROMISES.map(({ icon: Icon, title, detail }) => (
-                <div
+                <article
                   key={title}
-                  className="promise-card group flex items-start gap-4 p-4 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:border-slate-200 transition-all duration-300 cursor-default"
+                  className="promise-card flex flex-col gap-3 p-4 sm:p-5 rounded-xl border border-[#e1e2e7] bg-[#f8f6f1] hover:bg-white hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300"
                 >
-                  <div
-                    className="shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
-                    style={{ background: 'rgba(128,21,37,0.1)' }}
-                  >
-                    <Icon className="w-4 h-4 text-primary" />
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-primary" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[13px] font-bold text-slate-800 leading-snug">{title}</p>
-                    <p className="mt-1 text-[12px] leading-relaxed text-slate-400 max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-out">
+                  <div>
+                    <h4 className="text-[14px] font-bold text-charcoal leading-snug">{title}</h4>
+                    <p className="mt-1.5 text-[12px] sm:text-[13px] leading-relaxed text-[#6f7174]">
                       {detail}
                     </p>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-slate-200 shrink-0 mt-0.5 group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-300" />
-                </div>
+                </article>
               ))}
             </div>
 
-            {/* Bottom email */}
-            <div className="mt-6 pt-5 border-t border-slate-100 shrink-0 relative z-10">
+            <div className="mt-6 pt-5 border-t border-[#e8ecf1] shrink-0 relative z-10">
               <a
                 href={`mailto:${companyInfo.email}`}
-                className="text-[13px] text-slate-400 hover:text-primary transition-colors"
+                className="text-[13px] font-medium text-[#6f7174] hover:text-primary transition-colors"
               >
                 {companyInfo.email}
               </a>

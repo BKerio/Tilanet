@@ -26,20 +26,25 @@ export default function Clients() {
             Some of Our Clientage
           </h2>
 
-          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-10 sm:gap-x-12 sm:gap-y-12 lg:gap-x-16 lg:gap-y-14 max-w-6xl mx-auto list-none p-0 m-0">
+          <ul className="flex flex-wrap items-start justify-center gap-x-8 gap-y-10 sm:gap-x-12 sm:gap-y-12 lg:gap-x-16 lg:gap-y-14 max-w-6xl mx-auto list-none p-0 m-0">
             {clientageLogos.map((client) => (
               <li
                 key={client.name}
-                className="flex items-center justify-center w-[140px] sm:w-[160px] lg:w-[180px] min-h-[72px] sm:min-h-[80px]"
+                className="flex flex-col items-center justify-start w-[140px] sm:w-[160px] lg:w-[180px]"
               >
-                <img
-                  src={client.logo}
-                  draggable="false"
-                  alt={client.name}
-                  title={client.name}
-                  className="max-h-14 sm:max-h-16 lg:max-h-[72px] w-full max-w-full object-contain"
-                  loading="lazy"
-                />
+                <div className="flex items-center justify-center w-full min-h-[72px] sm:min-h-[80px]">
+                  <img
+                    src={client.logo}
+                    draggable="false"
+                    alt={client.name}
+                    title={client.name}
+                    className="max-h-14 sm:max-h-16 lg:max-h-[72px] w-full max-w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="mt-3 text-center text-[12px] sm:text-[13px] font-semibold leading-snug text-charcoal/80">
+                  {client.name}
+                </p>
               </li>
             ))}
           </ul>

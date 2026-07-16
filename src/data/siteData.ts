@@ -23,6 +23,7 @@ export const navLinks = [
   },
   { label: 'Industries', href: '/industries' },
   { label: 'Process', href: '/process' },
+  { label: 'Clients', href: '/clients' },
   { label: 'Contact Us', href: '/contact' },
 ];
 

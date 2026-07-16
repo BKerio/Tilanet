@@ -92,7 +92,8 @@ export default function Footer() {
                 { num: '02', label: 'Services', href: '/services' },
                 { num: '03', label: 'Industries', href: '/industries' },
                 { num: '04', label: 'Process', href: '/process' },
-                { num: '05', label: 'Contact Us', href: '/contact' },
+                { num: '05', label: 'Clients', href: '/clients' },
+                { num: '06', label: 'Contact Us', href: '/contact' },
               ].map((link) => (
                 <li key={link.href} className="border-t border-charcoal/10">
                   <Link
