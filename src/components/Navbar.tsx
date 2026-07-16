@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Mail, MapPin, Search } from "lucide-react";
+import { Menu, X, Mail, Search } from "lucide-react";
 import { companyInfo, navLinks } from "@/data/siteData";
 import logoImg from "@/assets/logo.png";
 import { SearchModal } from "@/components/SearchModal";
@@ -69,9 +69,13 @@ export default function Navbar() {
           <div className="container-custom flex items-center justify-between h-[44px] text-[13px]">
             {/* Left: location + email */}
             <div className="flex items-center gap-6" style={{ color: "#555" }}>
-              <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
-                Upperhill, Nairobi, Kenya
+              <span className="flex items-center gap-2">
+                <img
+                  src="src/assets/kenya.webp"
+                  alt="Kenya flag"
+                  className="w-7 h-7 rounded-full object-cover ring-1 ring-black/10 shrink-0"
+                />
+                Kenya
               </span>
               
             </div>
@@ -212,9 +216,6 @@ export default function Navbar() {
 
         {/* Mobile footer */}
         <div className="px-6 pb-8 pt-4 border-t border-white/10 flex flex-col items-center gap-3 text-[13px] text-white/50">
-          <a href={`tel:${companyInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-white transition-colors">
-            <Phone className="w-4 h-4 text-primary" /> {companyInfo.phone}
-          </a>
           <a href={`mailto:${companyInfo.email}`} className="flex items-center gap-2 hover:text-white transition-colors">
             <Mail className="w-4 h-4 text-primary" /> {companyInfo.email}
           </a>

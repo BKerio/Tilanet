@@ -1,5 +1,3 @@
-
-
 export type SolutionProduct = {
   name: string;
   logo: string;
@@ -394,8 +392,8 @@ export const companyInfo = {
   vision: 'To be the most trusted general supplier in Kenya and the wider East African region, known for reliability, quality, and consistently putting our clients first.',
   mission: 'To be a dependable and efficient supply partner, providing quality products at fair prices without cutting corners. We work closely with each client to understand their needs, respond promptly, and build long-term relationships built on trust, consistency, and honest service.',
   founded: '2021',
-  address: 'Manga House, Ground Floor, Kiambere Road, Upperhill, Nairobi, Kenya',
-  phone: '+254 717 331504',
+  // address: 'Manga House, Ground Floor, Kiambere Road, Upperhill, Nairobi, Kenya',
+  // phone: '+254 717 331504',
   email: 'info@tila-net.co.ke',
   website: 'tila-net.co.ke',
   hours: {
