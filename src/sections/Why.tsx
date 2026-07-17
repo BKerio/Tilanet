@@ -55,8 +55,12 @@ export default function WhyChooseUs() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             
             <div className="why-items-container space-y-12">
-              <h2 className="why-title text-2xl sm:text-3xl font-bold text-black">
-                Why Choose <span className="text-gray-600">TILA-NET ENTERPRISES LIMITED</span>?
+              <h2 className="why-title text-2xl sm:text-3xl font-bold text-black leading-[1.35] pb-[0.06em]">
+                Why Choose{' '}
+                <span className="text-gray-600 block sm:inline break-words">
+                  TILA-NET ENTERPRISES LIMITED
+                </span>
+                ?
               </h2>
 
               {leftItems.map((item) => {

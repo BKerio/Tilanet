@@ -205,7 +205,7 @@ export default function Hero() {
                   </span>
                 </div>
 
-                <h1 className="text-slate-900 font-bold tracking-tight text-balance leading-[1.05]" style={{ fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)" }}>
+                <h1 className="text-slate-900 font-bold tracking-tight text-balance leading-[1.3] pb-[0.06em]" style={{ fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)" }}>
                   {slide.title}
                 </h1>
 

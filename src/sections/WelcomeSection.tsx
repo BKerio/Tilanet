@@ -38,7 +38,7 @@ export default function WelcomeSection() {
         <div className="grid lg:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)] gap-12 lg:gap-14 xl:gap-16 items-center">
           <div className="welcome-content">
             <p className="sec-subtitle">Welcome</p>
-            <h2 className="sec-title mt-2 mb-6">
+            <h2 className="sec-title mt-2 mb-6 break-words">
               {companyInfo.name}
               <span className="block text-2xl sm:text-3xl font-medium text-[#6f7174] mt-2 tracking-normal">
                 {companyInfo.description}
@@ -100,7 +100,7 @@ export default function WelcomeSection() {
               <div className="flex flex-col items-center shrink-0 sm:items-start">
                 <div className="w-[132px] h-[132px] sm:w-[144px] sm:h-[144px] rounded-full bg-charcoal p-[3px] shadow-[0_12px_40px_rgba(24,25,28,0.18)]">
                   <div className="w-full h-full rounded-full bg-white border-[3px] border-golden flex flex-col items-center justify-center text-center px-3">
-                    <span className="text-[38px] sm:text-[42px] font-bold text-charcoal leading-none">
+                    <span className="text-[38px] sm:text-[42px] font-bold text-charcoal leading-[1.2]">
                       {stats[0].value}{stats[0].suffix}
                     </span>
                     <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.12em] text-[#6f7174] mt-1.5 leading-tight">

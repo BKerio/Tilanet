@@ -17,7 +17,7 @@ export default function PageHero({ eyebrow, title, description }: PageHeroProps)
       <div className="container-custom relative z-10">
         <div className="max-w-3xl">
           <p className="sec-subtitle text-white/60">{eyebrow}</p>
-          <h1 className="mt-3 text-4xl sm:text-5xl lg:text-[50px] font-semibold text-white leading-[1.2] tracking-tight">
+          <h1 className="mt-3 text-4xl sm:text-5xl lg:text-[50px] font-semibold text-white leading-[1.35] tracking-tight pb-[0.06em]">
             {title}
           </h1>
           {description && (

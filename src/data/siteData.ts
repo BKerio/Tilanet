@@ -12,6 +12,7 @@ export type SolutionCategory = {
 export const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
+  { label: 'Waste Management', href: '/waste-management' },
   {
     label: 'Services',
     href: '/services',

@@ -204,7 +204,7 @@ export default function CTABanner() {
 
             <div className="mt-8 relative z-10">
               <p className="text-[11px] font-bold uppercase tracking-widest text-[#6f7174] mb-3">Why choose us</p>
-              <h3 className="text-2xl sm:text-3xl font-bold text-charcoal leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-charcoal leading-[1.35] pb-[0.06em]">
                 Procurement done{' '}
                 <RotatingWord />
               </h3>

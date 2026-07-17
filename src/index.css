@@ -34,6 +34,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
@@ -42,12 +43,18 @@
     font-size: 15px;
     line-height: 30px;
     color: #6f7174;
+    overflow-x: clip;
+    max-width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Syne', system-ui, sans-serif;
     color: #18191c;
     letter-spacing: -0.02em;
+    line-height: 1.35;
+    padding-bottom: 0.08em;
+    overflow: visible;
+    overflow-wrap: break-word;
   }
 
   ::selection {
@@ -62,7 +69,7 @@
   }
 
   .sec-title {
-    @apply text-3xl sm:text-4xl lg:text-[50px] font-semibold text-charcoal leading-[1.2] tracking-tight;
+    @apply text-3xl sm:text-4xl lg:text-[50px] font-semibold text-charcoal leading-[1.35] tracking-tight pb-[0.06em];
   }
 
   .section-padding {
@@ -167,7 +174,7 @@
   }
 
   .display-md {
-    @apply text-3xl sm:text-4xl lg:text-[50px] font-semibold text-figure-ink leading-[1.2] tracking-tight;
+    @apply text-3xl sm:text-4xl lg:text-[50px] font-semibold text-figure-ink leading-[1.35] tracking-tight pb-[0.06em];
   }
 
   .eyebrow {
@@ -182,6 +189,12 @@
 @layer utilities {
   .text-body {
     color: #6f7174;
+  }
+
+  .heading-safe {
+    line-height: 1.35;
+    padding-bottom: 0.08em;
+    overflow: visible;
   }
 }
 

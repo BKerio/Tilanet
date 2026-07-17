@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <AccessibilityProvider>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col overflow-x-clip">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

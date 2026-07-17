@@ -20,7 +20,7 @@ export default function EkobyteSectionHeader({
         </span>
         <span className="w-10 sm:w-14 h-px bg-golden" aria-hidden="true" />
       </div>
-      <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold text-charcoal leading-[1.15] tracking-tight">
+      <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold text-charcoal leading-[1.35] tracking-tight pb-[0.06em]">
         {title}
       </h2>
       {description && (

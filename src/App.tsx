@@ -7,6 +7,7 @@ import Industries from '@/pages/Industries';
 import Process from '@/pages/Process';
 import Clients from '@/pages/Clients';
 import Contact from '@/pages/Contact';
+import WasteManagement from '@/pages/WasteManagement';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/process" element={<Process />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/waste-management" element={<WasteManagement />} />
       </Routes>
     </Layout>
   );
